@@ -18,4 +18,4 @@ jobs:
           distribution: 'adopt'
 
       - name: Run tests
-        run: mvn test -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
+        run: mvn clean test --file pom.xml -Dusername=${{ secrets.USERNAME }} -Dpassword=${{ secrets.PASSWORD }}
