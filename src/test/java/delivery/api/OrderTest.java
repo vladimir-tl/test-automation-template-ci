@@ -1,5 +1,6 @@
 package delivery.api;
 
+import delivery.dto.OrderDto;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
@@ -11,11 +12,24 @@ public class OrderTest extends BaseSetupApi {
     @Test
     void getOrderInformationAndCheckResponse() {
 
-        Response response = ApiClient.getOrders(getAuthenticatedRequestSpecification() );
+        Response response = ApiClient.getOrders( getAuthenticatedRequestSpecification() );
 
         Assertions.assertAll("Test description",
                 () -> Assertions.assertEquals(HttpStatus.SC_OK, response.getStatusCode(), "Status code is OK")
         );
+    }
 
+    @Test
+    void createOrderAndCheckResponse() {
+
+        // order creation
+        OrderDto orderDto = OrderDto.createRandomOrder();
+        Response response = ApiClient.createOrder(getAuthenticatedRequestSpecification(), orderDto );
+
+        Assertions.assertAll("Test description",
+                () -> Assertions.assertEquals(HttpStatus.SC_OK, response.getStatusCode(), "Status code is OK"),
+                () -> Assertions.assertNotNull(response.getBody().path("id")),
+                () -> Assertions.assertNull(response.getBody().path("courierId"))
+        );
     }
 }
