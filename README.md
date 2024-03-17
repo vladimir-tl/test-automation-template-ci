@@ -1,11 +1,7 @@
 **Configuration**
 1. Open the `src/test/resources/application.yaml` file.
-2. Update with your credentials:
+2. Update github env variables
 
-    ```yaml
-    general:
-      username: YOUR_API_KEY_HERE
-    ```
 **Usage**
 ```
 mvn clean test  
