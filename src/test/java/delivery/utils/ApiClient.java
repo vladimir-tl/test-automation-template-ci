@@ -25,6 +25,26 @@ public class ApiClient extends BaseSetupApi {
                 .response();
     }
 
+
+    public static OrderDto[] getOrdersArray(RequestSpecification spec){
+
+        Response response = given()
+                .spec(spec)
+                .log()
+                .all()
+                .get("orders")
+                .then()
+                .log()
+                .all()
+                .extract()
+                .response();
+
+        return new Gson().fromJson(response.getBody().asString(), OrderDto[].class);
+    }
+
+
+
+
     public static Response createOrder(RequestSpecification spec, OrderDto orderDto){
 
         return given()

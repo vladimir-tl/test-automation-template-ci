@@ -20,6 +20,15 @@ public class OrderTest extends BaseSetupApi {
     }
 
     @Test
+    void getOrdersArrayInformationAndCheckResponse() {
+        OrderDto[] ordersResponse = ApiClient.getOrdersArray( getAuthenticatedRequestSpecification() );
+        for (int orderIteration = 0; orderIteration < ordersResponse.length; orderIteration++){
+            System.out.println( "Order id: " + ordersResponse[orderIteration].getId() );
+        }
+
+    }
+
+    @Test
     void createOrderAndCheckResponse() {
 
         // order creation
